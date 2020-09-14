@@ -18,15 +18,15 @@ app.use(express.urlencoded({ extended: false }));
 app.set('view engine', 'ejs');
 
 app.get('/', async (req, res, next) => {
-  const shortUrls = await URL.find();
-  res.render('index', { shortUrls: shortUrls });
+  const shortUrl = await URL.find();
+  res.render('index', { shortUrls: shortUrl });
   //console.log(shortUrls);
 });
 
 app.post('/shortner', async (req, res, next) => {
   const shortid = shortcode.generate();
   const { fullurl } = req.body;
-  const shorturl = 'http://' + req.get(`host`) + '/' + shortid;
+  const shorturl = req.protocol+"://" + req.get(`host`) + '/' + shortid;
 
   var url = new URL({
     fullurl: fullurl,
@@ -52,7 +52,6 @@ app.get('/del/:shortUrl', async (req, res) => {
   if (shortUrl == null) return res.sendStatus(404);
   shortUrl.remove();
   //console.log(shortUrl);
-  res.render('index', { url: shortUrl });
   res.redirect('/');
 });
 
