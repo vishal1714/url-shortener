@@ -42,7 +42,7 @@ app.get('/:shortUrl', async (req, res) => {
 
   shortUrl.count++;
   shortUrl.save();
-  console.log(shortUrl);
+  //console.log(shortUrl);
   res.redirect(shortUrl.fullurl);
 });
 
