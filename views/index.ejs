@@ -10,6 +10,12 @@
       integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
       crossorigin="anonymous"
     />
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
+      integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN"
+      crossorigin="anonymous"
+    />
     <title>URL Shrinker</title>
   </head>
   <body>
@@ -24,7 +30,7 @@
           name="fullurl"
           id="fullurl"
           class="form-control col mr-2"
-        />
+          />
         <button class="btn btn-success" type="submit">Shrink</button>
       </form>
 
@@ -35,6 +41,7 @@
             <th>Short URL</th>
             <th>Short Code</th>
             <th>Clicks</th>
+            <th>Delete</th>
           </tr>
         </thead>
         <tbody>
@@ -50,6 +57,11 @@
               <a href="<%= shortUrl.shorturl %>"><%= shortUrl.shortcode %></a>
             </td>
             <td><%= shortUrl.count %></td>
+            <td>
+              <a href="/del/<%= shortUrl.shortcode %>"
+                ><i class="fa fa-trash" aria-hidden="true"></i
+              ></a>
+            </td>
           </tr>
           <% }) %>
         </tbody>

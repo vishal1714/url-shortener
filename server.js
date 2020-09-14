@@ -20,15 +20,16 @@ app.set('view engine', 'ejs');
 app.get('/', async (req, res, next) => {
   const shortUrls = await URL.find();
   res.render('index', { shortUrls: shortUrls });
+  //console.log(shortUrls);
 });
 
 app.post('/shortner', async (req, res, next) => {
   const shortid = shortcode.generate();
   const { fullurl } = req.body;
-  const shorturl = process.env.BASEURL + shortid;
+  const shorturl = 'http://' + req.get(`host`) + '/' + shortid;
 
   var url = new URL({
-    fullurl: req.body.fullurl,
+    fullurl: fullurl,
     shortcode: shortid,
     shorturl: shorturl,
   });
@@ -44,6 +45,15 @@ app.get('/:shortUrl', async (req, res) => {
   shortUrl.save();
   //console.log(shortUrl);
   res.redirect(shortUrl.fullurl);
+});
+
+app.get('/del/:shortUrl', async (req, res) => {
+  const shortUrl = await URL.findOne({ shortcode: req.params.shortUrl });
+  if (shortUrl == null) return res.sendStatus(404);
+  shortUrl.remove();
+  //console.log(shortUrl);
+  res.render('index', { url: shortUrl });
+  res.redirect('/');
 });
 
 const PORT = process.env.PORT || 5000;
