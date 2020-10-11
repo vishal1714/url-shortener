@@ -1,12 +1,10 @@
 const express = require('express');
 const ejs = require('ejs');
-const dotenv = require('dotenv');
 const color = require('color');
 const ConnectDB = require('./config/db');
 const shortcode = require('shortid');
 const URL = require('./models/shorturl.model');
 
-dotenv.config({ path: './config/config.env' });
 
 ConnectDB();
 
