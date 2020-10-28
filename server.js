@@ -49,7 +49,7 @@ app.get('/del/:shortUrl', async (req, res) => {
   const shortUrl = await URL.findOne({ shortcode: req.params.shortUrl });
   if (shortUrl == null) return res.sendStatus(404);
   shortUrl.remove();
-  //console.log(shortUrl);
+  console.log(shortUrl);
   res.redirect('/');
 });
 
