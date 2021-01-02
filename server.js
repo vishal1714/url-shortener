@@ -53,7 +53,7 @@ app.get('/del/:shortUrl', async (req, res) => {
   res.redirect('/');
 });
 
-const PORT = process.env.PORT || 8082;
+const PORT = process.env.PORT || 5001;
 
 app.listen(PORT, () => {
   console.log(`Server is running in ${process.env.NODE_ENV} on Port ${PORT}`);
